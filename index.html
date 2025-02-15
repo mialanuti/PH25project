@@ -32,11 +32,22 @@
     <br>
         <input type="submit">
     </form>
+    <input type="file" id="busy_places_dataset" accept=".csv">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
 
     <script>
         submitted = function(input){
             var hi = document.getElementById("location").value
             alert("Feedback submitted. Thanks." + input);
+        }
+        function parseCSV(csvText) {
+            console.log("TESTING")
+            Papa.parse(csvText, {
+                header: true,
+                complete: function(results) {
+                    console.log(results.data); // Print CSV data
+                }
+            });
         }
      </script>
 </body>
