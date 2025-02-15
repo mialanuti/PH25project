@@ -11,5 +11,7 @@ body {
         margin: 15px;
         }
         label {
-            font-size: 50px; 
+            font-size: 20px; 
+            margin: 15px;
+            color: #b4cff9
                 }
