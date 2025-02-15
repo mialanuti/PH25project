@@ -7,7 +7,3 @@ pig.onclick = function(){
 		pig.innerHTML = "pig"
 	}
 }
-
-submitted = function (){
-	alert("submitted!");
-}

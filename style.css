@@ -1,12 +1,15 @@
 body {
-    background-color: #ffd0cc;
-        color: #9a5c38;
+    background-color: #579df3;
+        color: #ffffff;
         text-align: center;
         margin-top: 80px;
     }
-    button {
-        background-color: #9a5c38;
-        color: #ffd0cc;
-        font-size: 15px;
+    h1 {
+        background-color: #579df3;
+        color: #ffffff;
+        font-size: 50px;
         margin: 15px;
-    }
+        }
+        label {
+            font-size: 50px; 
+                }
