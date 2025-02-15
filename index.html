@@ -9,7 +9,7 @@
 </head>
 <body>
     <h1>Heel Tracker</h1>
-    <form action="javascript:;" onsubmit="submitted(this)">
+    <form action="javascript:;" onsubmit="submitted(event)">
         <label for="location">Location: </label>
         <select id="location" name="location">
           <option value="davis">Davis Library </option>
@@ -34,9 +34,15 @@
     </form>
 
     <script>
-        submitted = function(input){
-            var hi = document.getElementById("location").value
-            alert("Feedback submitted. Thanks." + input);
+        submitted = function(event){
+            event.preventDefault(); // Prevent form submission from reloading the page
+        
+            var form = event.target; 
+            var occupancyValue = form.elements["busy"].value; 
+            var locationValue = form.elements["location"].value;
+
+            alert("Feedback submitted. Occupancy: " + occupancyValue + ", Location: " + locationValue + ".");
+
         }
      </script>
 </body>
