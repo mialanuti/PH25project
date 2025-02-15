@@ -3,6 +3,19 @@
 
 function readCSVFile() {
 	let tracker = []
+
+	function filterUniqueByField(array, field) {
+		const seen = new Set();
+		return array.filter(item => {
+			if (seen.has(item[field])) {
+				return false;
+			} else {
+				seen.add(item[field]);
+				return true;
+			}
+		}).filter(item => item["Location"] !== '' );
+	}
+
     fetch('./busy_places_dataset.csv')
     .then(response => {
         return response.text()
@@ -27,43 +40,26 @@ function readCSVFile() {
             }
         });
 		console.log(tracker)
+		
+		const uniqueLocations = filterUniqueByField(tracker,'Location')
+		console.log(uniqueLocations)
+		let trackerContainer = document.getElementById("tracker-container");
+		const trackers = uniqueLocations.map((item, index) => {
+			const trackerInfo = document.createElement("div")
+			return `<div class="tracker-info" id="tracker-info" onclick="updateGraph('${item["Location"]}', '${tracker}')">
+			<p class = "tracker-location">Location: ${item["Location"]}</p>
+			<p class = "tracker-business">Business: ${item["Business"]}</p>
+			<p class = "tracker-time">Time Updated: ${item["Time"]}</p>
+			</div>`
+			
+		})
+		let trackerInfoContainer = document.getElementById("tracker-info");
+		trackerContainer.innerHTML = trackers
     });
+
 }
-  // response.json())
-//   .then(data => console.log(data))
-//   .catch(error => console.log(error));
-
-//     if (!file) {
-//         console.log("No file selected.");
-//         return;
-//     }
-
-//     const reader = new FileReader();
-    
-//     reader.onload = function (e) {
-//         const text = e.target.result;
-
-//         // Using PapaParse to parse CSV
-//         Papa.parse(text, {
-//             header: true, // If the first row contains headers
-//             skipEmptyLines: true, // Ignore empty lines
-//             complete: function (result) {
-//                 console.log("CSV Data:", result.data); // Prints array of objects
-//             }
-//         });
-//     };
-
-//     reader.readAsText(file);
-// }
-
-
-// var pig = document.getElementById("pig")
-// var pig_emoji = "🐷"
-// pig.onclick = function(){
-// 	if(!pig.innerHTML.includes(pig_emoji)){
-// 		pig.innerHTML = pig.innerHTML + pig_emoji
-// 	} else {
-// 		pig.innerHTML = "pig"
-// 	}
-// }
+function updateGraph(location, data){
+	let graphContainer = document.getElementById("graph-container");
+	console.log(location)
+}
 readCSVFile()
