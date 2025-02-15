@@ -3,15 +3,16 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
-        <title> Hack 101 <3 </title>
+        <title> Tarheel Traffic </title>
         <link rel="stylesheet" href="style.css">
         <script src="main.js" defer></script>
 </head>
 <body>
-    <h1>Heel Tracker</h1>
+    <h1>Report Conditions</h1>
     <form action="javascript:;" onsubmit="submitted(event)">
-        <label for="location">Location: </label>
+        <label for="location">Where are you? </label>
         <select id="location" name="location">
+          <option value="" selected disabled hidden>Select location...</option>
           <option value="davis">Davis Library </option>
           <option value="bolo">BOLO</option>
           <option value="tolo">TOLO</option>
@@ -20,9 +21,10 @@
           <option value="ul">UL Library</option>
         </select>
     <br>
-        <label for="busy">Occupancy: </label>
+        <label for="busy">How busy is it? </label>
         <select id="busy" name="busy">
-          <option value="0">0 </option>
+          <option value="" selected disabled hidden>Rate 0 (empty) through 5 (packed)</option>
+          <option value="0">0</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -30,8 +32,9 @@
           <option value="5">5</option>
         </select>
         <br>
-        <label for="noise">Noise: </label>
+        <label for="noise">How noisy is it? </label>
         <select id="noise" name="noise">
+          <option value="" selected disabled hidden>Rate 0 (silent) through 5 (deafening)</option>
           <option value="0">0 </option>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -50,46 +53,56 @@
             event.preventDefault(); // Prevent form submission from reloading the page
         
             var form = event.target; 
-            var occupancyValue = form.elements["busy"].value; 
+            var busyValue = form.elements["busy"].value; 
             var locationValue = form.elements["location"].value;
             var noiseValue = form.elements["noise"].value;
+            var timeValue = Date.now();
 
-            //TODO switch from occupancy value to value from data
-            var seatsArr = calcSeating(occupancyValue, locationValue);
-            var seatsValue = seatsArr[0];
-            var seatsType = seatsArr[1];
+            storeReport(busyValue, locationValue, noiseValue, timeValue);
 
-            alert("Feedback submitted. Occupancy: " + occupancyValue + ", Location: " + locationValue + ", Noise: "+ noiseValue + ", Estimated Availiable "+seatsType+": " + seatsValue + ".");
+            //TODO switch from occupancy values to average values from data
+            let [seatsValue, seatsType] = calcSeating(busyValue, locationValue);
+
+            //TODO update charts?
+            alert("Feedback submitted. Busy: " + busyValue + ", Location: " + locationValue + ", Noise: "+ noiseValue + ", Estimated Availiable "+seatsType+": " + seatsValue + ".");
 
         }
         
         calcSeating = function (busy, location){
-            var seats = 0;
+            var seats = 0.0;
             var type = "seats";
+
             switch(location){
                 case "davis": 
-                    seats == 150+60+40+40+70+(6 * (40+80));
+                    seats = 150+60+40+40+70+(6 * (40+80));
+                    break;
                 case "bolo":
-                    seats == 250;
+                    seats = 250;
+                    break;
                 case "tolo":
-                    seats == 450;
+                    seats = 450;
+                    break;
                 case "rams":
-                    seats == 16+14+10+10+3+8+10;
-                    type == "machines";
+                    seats = 16+14+10+10+3+8+10;
+                    type = "machines";
+                    break;
                 case "src":
-                    seats == 80 +20 + 12+ 6 +6+4+30;
-                    type == "machines";
+                    seats = 80 +20 + 12+ 6 +6+4+30;
+                    type = "machines";
+                    break;
                 case "ul": 
-                    seats == 500;
+                    seats = 500;
+                    break;
                 default: 
                     alert("LOCATION INVALID, CALC SEATING ERROR.");
-                    seats == -1;
-                    type == "NULL"
+                    seats = -1;
+                    type = "NULL";
+                    break;
             }
 
-            var seatsAvail = seats * (100 - busy * 20.0);
-
-            return {seatsAvail, type}
+            var seatsAvail = seats * (1 - busy * 0.2);
+            
+            return [seatsAvail, type];
         }
         function parseCSV(csvText) {
             console.log("TESTING")
@@ -99,6 +112,10 @@
                     console.log(results.data); // Print CSV data
                 }
             });
+        }
+
+        function storeReport(busy, loc, noise, date){
+          //TODO store event to dataframe??
         }
      </script>
 </body>
