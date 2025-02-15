@@ -48,12 +48,46 @@
             event.preventDefault(); // Prevent form submission from reloading the page
         
             var form = event.target; 
-            var occupancyValue = form.elements  ["busy"].value; 
+            var occupancyValue = form.elements["busy"].value; 
             var locationValue = form.elements["location"].value;
             var noiseValue = form.elements["noise"].value;
 
-            alert("Feedback submitted! Occupancy: " + occupancyValue + ", Location: " + locationValue + ", Noise: "+ noiseValue);
+            //TODO switch from occupancy value to value from data
+            var seatsArr = calcSeating(occupancyValue, locationValue);
+            var seatsValue = seatsArr[0];
+            var seatsType = seatsArr[1];
 
+            alert("Feedback submitted. Occupancy: " + occupancyValue + ", Location: " + locationValue + ", Noise: "+ noiseValue + ", Estimated Availiable "+seatsType+": " + seatsValue + ".");
+
+        }
+        
+        calcSeating = function (busy, location){
+            var seats = 0;
+            var type = "seats";
+            switch(location){
+                case "davis": 
+                    seats == 150+60+40+40+70+(6 * (40+80));
+                case "bolo":
+                    seats == 250;
+                case "tolo":
+                    seats == 450;
+                case "rams":
+                    seats == 16+14+10+10+3+8+10;
+                    type == "machines";
+                case "src":
+                    seats == 80 +20 + 12+ 6 +6+4+30;
+                    type == "machines";
+                case "ul": 
+                    seats == 500;
+                default: 
+                    alert("LOCATION INVALID, CALC SEATING ERROR.");
+                    seats == -1;
+                    type == "NULL"
+            }
+
+            var seatsAvail = seats * (100 - busy * 20.0);
+
+            return {seatsAvail, type}
         }
      </script>
 </body>
