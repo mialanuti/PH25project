@@ -40,7 +40,7 @@ function readCSVFile() {
 					const trackersHTML = uniqueLocations.map((item) => `
 						<div class="tracker-info" onclick="updateGraph('${item["Location"]}', '${item["Business"]}')">
 							<p class="tracker-location"><h2> ${item["Location"]}</h2></p>
-							<p class="tracker-business">Business: ${item["Business"]}</p>
+							<p class="tracker-business">Occupancy Rating: ${item["Business"]}</p>
 							<p class="tracker-time">Time Updated: ${item["Time"]}</p>
 						</div>
 					`).join(""); // Convert array to string
@@ -53,6 +53,7 @@ function readCSVFile() {
 }
 
 // Function to update graph
+
 function updateGraph(location, busyNumber) {
 	var graphContainer = document.getElementById("graph-canvas").getContext("2d");
 	

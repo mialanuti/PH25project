@@ -41,5 +41,57 @@ body {
                 .tracker-info:hover {
                     transform: scale(1.05); /* Slight zoom on hover */
                 }
+                form {
+                    background: white;
+                    padding: 20px;
+                    border-radius: 10px;
+                    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+                    display: inline-block;
+                    text-align: left;
+                }
+                
+                /* Labels */
+                label {
+                    font-size: 16px;
+                    font-weight: bold;
+                    display: block;
+                    margin: 10px 0 5px;
+                }
+                
+                /* Styled Select Dropdown */
+                select {
+                    width: 100%;
+                    padding: 8px;
+                    font-size: 14px;
+                    border-radius: 5px;
+                    border: 1px solid #ccc;
+                    background-color: #fff;
+                    cursor: pointer;
+                }
+                
+                /* Styled Submit Button */
+                input[type="submit"] {
+                    margin-top: 15px;
+                    padding: 10px 20px;
+                    font-size: 16px;
+                    font-weight: bold;
+                    color: white;
+                    background-color: #007BFF;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    transition: 0.3s ease-in-out;
+                }
+                
+                input[type="submit"]:hover {
+                    background-color: #0056b3;
+                }
+                
+                /* Responsive Design */
+                @media (max-width: 600px) {
+                    form {
+                        width: 90%;
+                    }
+                }
                 
 
