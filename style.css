@@ -16,4 +16,30 @@ body {
             margin: 15px;
             color: #b4cff9
                 }
-    
+                #tracker-container {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+                    grid-template-rows: repeat(2, auto);  /* 2 rows, auto height */
+                    gap: 20px; /* Space between grid items */
+                    width: 80%; /* Adjust width as needed */
+                    margin: auto; /* Center the grid */
+                    padding: 20px;
+                    justify-content: center; /* Centers the grid items */
+                }
+                
+                .tracker-info {
+                    background-color: navy;
+                    padding: 20px;
+                    border-radius: 15px; /* Rounded edges */
+                    text-align: center;
+                    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+                    font-family: Arial, sans-serif;
+                    font-size: 16px;
+                    transition: transform 0.2s ease-in-out;
+                }
+                
+                .tracker-info:hover {
+                    transform: scale(1.05); /* Slight zoom on hover */
+                }
+                
+
