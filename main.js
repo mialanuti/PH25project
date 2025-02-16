@@ -38,7 +38,7 @@ function readCSVFile() {
 					// Generate HTML elements
 					let trackerContainer = document.getElementById("tracker-container");
 					const trackersHTML = uniqueLocations.map((item) => `
-						<div class="tracker-info" onclick="updateGraph('${item["Location"]}', '${JSON.stringify(item)}')">
+						<div class="tracker-info" onclick="updateGraph('${item["Location"]}', '${item["Business"]}')">
 							<p class="tracker-location"><h2> ${item["Location"]}</h2></p>
 							<p class="tracker-business">Occupancy Rating: ${item["Business"]}</p>
 							<p class="tracker-time">Time Updated: ${item["Time"]}</p>
@@ -53,11 +53,23 @@ function readCSVFile() {
 }
 
 // Function to update graph
-function updateGraph(location, data) {
-	let graphContainer = document.getElementById("graph-container");
-	console.log("Updating graph for:", location);
-	console.log("Data:", JSON.parse(data)); // Parse JSON string back to object
+
+function updateGraph(location, busyNumber) {
+	var graphContainer = document.getElementById("graph-canvas").getContext("2d");
 	
+	if (window.myChart) {
+		window.myChart.destroy();
+	}
+	window.myChart = new Chart(graphContainer, {
+        type: "pie",
+        data: {
+            labels: ["busy", "not"],
+            datasets: [{
+                backgroundColor: ["#8f8f8f", "#d3d3d3"],
+                data: [parseInt(busyNumber), Math.max(0, 5 - parseInt(busyNumber))]
+            }]
+        }
+    });
 }
 
 readCSVFile();
