@@ -39,7 +39,7 @@ function readCSVFile() {
 					let trackerContainer = document.getElementById("tracker-container");
 					const trackersHTML = uniqueLocations.map((item) => `
 						<div class="tracker-info" onclick="updateGraph('${item["Location"]}', '${JSON.stringify(item)}')">
-							<p class="tracker-location">Location: ${item["Location"]}</p>
+							<p class="tracker-location"><h2> ${item["Location"]}</h2></p>
 							<p class="tracker-business">Business: ${item["Business"]}</p>
 							<p class="tracker-time">Time Updated: ${item["Time"]}</p>
 						</div>
