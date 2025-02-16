@@ -6,6 +6,7 @@
         <title> Tarheel Traffic </title>
         <link rel="stylesheet" href="style.css">
         <script src="main.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <h1>Heel Tracker</h1>
@@ -13,7 +14,7 @@
     
     </div>
     <div id="graph-container">
-        
+        <canvas id="graph-canvas"></canvas>
     </div>
     <h1>Report Conditions</h1>
     <form action="javascript:;" onsubmit="submitted(event)">
