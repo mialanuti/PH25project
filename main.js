@@ -57,6 +57,7 @@ function updateGraph(location, data) {
 	let graphContainer = document.getElementById("graph-container");
 	console.log("Updating graph for:", location);
 	console.log("Data:", JSON.parse(data)); // Parse JSON string back to object
+	
 }
 
 readCSVFile();
