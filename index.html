@@ -66,6 +66,9 @@
 
             storeReport(busyValue, locationValue, noiseValue, timeValue);
 
+
+            alert("Feedback submitted! Occupancy: " + occupancyValue + ", Location: " + locationValue + ", Noise: "+ noiseValue);
+
             //TODO switch from occupancy values to average values from data
             let [seatsValue, seatsType] = calcSeating(busyValue, locationValue);
 
@@ -122,6 +125,7 @@
 
         function storeReport(busy, loc, noise, date){
           //TODO store event to dataframe??
+
         }
      </script>
 </body>
